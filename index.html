@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GrantMatch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="GrantMatch finds the grants your small business qualifies for and drafts the application. Free for students.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Apple-style product site. Full-width bands alternating white, light grey and black; centered headlines with tight tracking; rounded tiles; pill buttons; a phone mockup as the product shot. Hash-routed pages. */
+:root{
+  --bg:#ffffff; --alt:#f5f5f7; --tile:#ffffff; --ink:#1d1d1f; --muted:#6e6e73; --line:#d2d2d7;
+  --blue:#0071e3; --link:#0066cc; --g1:#1fa35c; --g2:#0a8f9e; --navbg:rgba(251,251,253,.8);
+  --night:#000000; --night-tile:#1d1d1f; --night-ink:#f5f5f7; --night-muted:#a1a1a6;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#000000; --alt:#101012; --tile:#1d1d1f; --ink:#f5f5f7; --muted:#a1a1a6; --line:#424245;
+  --blue:#0a84ff; --link:#2997ff; --g1:#3ddc84; --g2:#36c5d6; --navbg:rgba(22,22,23,.8);
+  --night:#1d1d1f; --night-tile:#2c2c2e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --alt:#101012; --tile:#1d1d1f; --ink:#f5f5f7; --muted:#a1a1a6; --line:#424245;
+  --blue:#0a84ff; --link:#2997ff; --g1:#3ddc84; --g2:#36c5d6; --navbg:rgba(22,22,23,.8);
+  --night:#1d1d1f; --night-tile:#2c2c2e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:17px/1.47 var(--font);letter-spacing:-.022em;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:600}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--navbg)}
+
+.in{max-width:980px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.wide{max-width:1180px}
+
+/* global nav */
+.gnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--navbg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.gnav .in{display:flex;align-items:center;gap:1.5rem;height:48px}
+.logo{display:flex;align-items:center;gap:.45rem;color:var(--ink);font-weight:600;font-size:15px;letter-spacing:-.01em;flex:none}
+.logo:hover{text-decoration:none}
+.logo svg{width:20px;height:20px}
+.gnav nav{display:flex;gap:1.6rem;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1;justify-content:flex-end}
+.gnav nav a{color:var(--ink);opacity:.8;font-size:12.5px;white-space:nowrap;letter-spacing:-.01em}
+.gnav nav a:hover{opacity:1;text-decoration:none}
+.gnav nav a[aria-current="page"]{opacity:1;font-weight:600}
+@media (max-width:820px){.gnav .in{gap:1rem}.gnav nav{justify-content:flex-start;gap:1.1rem}}
+
+/* local nav */
+.lnav{border-bottom:1px solid var(--line);background:var(--bg)}
+.lnav .in{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:52px}
+.lnav b{font-size:21px;font-weight:600;letter-spacing:-.02em}
+
+/* buttons */
+.pill{display:inline-block;background:var(--blue);color:#fff;font-size:15px;font-weight:500;padding:.55rem 1.15rem;border-radius:980px;letter-spacing:-.01em;white-space:nowrap}
+.pill:hover{text-decoration:none;filter:brightness(1.08)}
+.pill.sm{font-size:12px;padding:.3rem .8rem}
+.more::after{content:" ›"}
+.ctas{display:flex;gap:1.4rem;align-items:center;justify-content:center;flex-wrap:wrap}
+
+/* bands */
+.band{padding-block:clamp(56px,9vw,110px)}
+.band.alt{background:var(--alt)}
+.band.night{background:var(--night);color:var(--night-ink)}
+.band.night .muted,.band.night .sub{color:var(--night-muted)}
+.center{text-align:center}
+.eyebrow{font-size:21px;font-weight:600;letter-spacing:.005em;color:var(--muted);margin-bottom:.4rem}
+.night .eyebrow{color:var(--night-muted)}
+.big{font-size:clamp(40px,7.2vw,80px);line-height:1.05;letter-spacing:-.045em;font-weight:700}
+.h2{font-size:clamp(32px,5vw,56px);line-height:1.07;letter-spacing:-.035em;font-weight:700}
+.h3{font-size:clamp(22px,2.6vw,28px);line-height:1.14;letter-spacing:-.025em}
+.sub{font-size:clamp(19px,2.2vw,24px);line-height:1.35;color:var(--muted);max-width:40rem;font-weight:500;letter-spacing:-.02em}
+.center .sub{margin-inline:auto}
+.muted{color:var(--muted)}
+.fine{font-size:12.5px;color:var(--muted);letter-spacing:-.01em;line-height:1.5}
+.night .fine{color:var(--night-muted)}
+.grad{background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stack{display:grid;gap:1.25rem}
+.gap-l{display:grid;gap:clamp(36px,5vw,64px)}
+.mt{margin-top:1.1rem}.mt2{margin-top:1.6rem}
+
+/* phone mockup */
+.stage{display:flex;justify-content:center;margin-top:clamp(36px,5vw,64px)}
+.phone{width:min(310px,82vw);aspect-ratio:9/18.6;border-radius:52px;background:#1d1d1f;padding:11px;box-shadow:0 0 0 1.5px #3a3a3c,0 40px 80px -30px rgba(0,0,0,.45);max-width:100%}
+.screen{height:100%;border-radius:42px;background:#f5f5f7;color:#1d1d1f;overflow:hidden;position:relative;padding:44px 16px 16px;display:grid;align-content:start;gap:10px;letter-spacing:-.01em;text-align:left}
+.screen::before{content:"";position:absolute;top:11px;left:50%;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#000}
+.screen .t{font-size:24px;font-weight:700;letter-spacing:-.03em}
+.screen .s{font-size:12px;color:#6e6e73;margin-top:-6px}
+.card{background:#fff;border-radius:16px;padding:12px 13px;display:grid;gap:3px}
+.card .r{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.card b{font-size:13.5px;font-weight:600;line-height:1.25}
+.card .amt{font-size:13px;font-weight:600;color:#1d1d1f;white-space:nowrap}
+.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;background:#e3f5ea;color:#137a43;justify-self:start}
+.chip.blue{background:#e5f0fd;color:#0066cc}
+.chip.done{background:#137a43;color:#fff}
+.screen .cta{margin-top:4px;background:#0071e3;color:#fff;border-radius:12px;text-align:center;font-size:13.5px;font-weight:600;padding:10px}
+.screen.dark{background:#1c1c1e;color:#f5f5f7}
+.screen.dark .card{background:#2c2c2e}
+.screen.dark .card .amt{color:#f5f5f7}
+.screen.dark .s{color:#a1a1a6}
+.screen.dark .chip{background:#1e3a2a;color:#5fd38d}
+.screen.dark .chip.blue{background:#13304f;color:#64a8ff}
+
+/* bento tiles */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.bento > *{min-width:0}
+.tile{background:var(--tile);border-radius:28px;padding:clamp(24px,3.4vw,40px);display:grid;gap:.6rem;align-content:start}
+.band:not(.alt):not(.night) .tile{background:var(--alt)}
+.night .tile{background:var(--night-tile)}
+.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}
+@media (max-width:820px){.bento{grid-template-columns:1fr 1fr}.s2,.s3{grid-column:span 1}.s4,.s6{grid-column:span 2}}
+@media (max-width:560px){.bento{grid-template-columns:1fr}.s2,.s3,.s4,.s6{grid-column:span 1}}
+.tile .k{font-size:14px;font-weight:600;color:var(--muted)}
+.stat{font-size:clamp(44px,6vw,72px);font-weight:700;letter-spacing:-.045em;line-height:1}
+.tile p{color:var(--muted);font-size:17px}
+.tile p b{color:var(--ink);font-weight:600}
+.pay{font-weight:600;font-size:17px}
+.num{font-size:44px;font-weight:700;letter-spacing:-.04em;line-height:1}
+
+ul.list{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+ul.list li{padding-left:1.5rem;position:relative;color:var(--muted)}
+ul.list li::before{content:"";position:absolute;left:0;top:.5em;width:.55rem;height:.55rem;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g2))}
+ul.list li b{color:var(--ink);font-weight:600}
+
+/* spec tables */
+.spec{overflow-x:auto}
+.spec table{border-collapse:collapse;width:100%;min-width:34rem;font-variant-numeric:tabular-nums}
+.spec th,.spec td{text-align:left;vertical-align:top;padding:1rem .75rem 1rem 0;border-top:1px solid var(--line)}
+.spec thead th{border-top:0;font-size:12.5px;font-weight:600;color:var(--muted);padding-bottom:.6rem}
+.spec tbody th{font-weight:600;white-space:nowrap;width:1%;padding-right:2rem}
+.spec td{color:var(--muted)}
+.spec td.n,.spec th.n{text-align:right;white-space:nowrap}
+.spec td.n{color:var(--ink);font-weight:500}
+.spec tr.tot th,.spec tr.tot td{color:var(--ink);font-weight:700}
+.spec tr.us th,.spec tr.us td{font-weight:700;color:var(--ink)}
+.spec.narrow table{min-width:0}
+.spec.narrow tbody th{white-space:normal;width:auto}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plans > *{min-width:0}
+@media (max-width:820px){.plans{grid-template-columns:1fr}}
+.plan{background:var(--tile);border-radius:28px;padding:36px 28px;display:grid;gap:1rem;align-content:start;text-align:center}
+.plan.pick{box-shadow:inset 0 0 0 2px var(--blue)}
+.plan .tag{font-size:12px;font-weight:600;color:var(--blue);min-height:1.2em}
+.plan .price{font-size:48px;font-weight:700;letter-spacing:-.04em;line-height:1}
+.plan .per{font-size:14px;color:var(--muted)}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;font-size:15px;color:var(--muted)}
+.plan ul li{border-top:1px solid var(--line);padding-top:.55rem}
+
+/* posts */
+.posts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.posts > *{min-width:0}
+@media (max-width:900px){.posts{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.posts{grid-template-columns:1fr}}
+.post{display:grid;gap:.7rem;align-content:start}
+.art{aspect-ratio:4/5;max-width:100%;border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;font-size:24px;font-weight:700;letter-spacing:-.035em;line-height:1.08}
+.art small{font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;opacity:.8}
+.a1{background:linear-gradient(160deg,#1fa35c,#0a8f9e);color:#fff}
+.a2{background:#2c2c2e;color:#f5f5f7}
+.a2 em{font-style:normal;color:#5fd38d}
+.a3{background:#e8f1fd;color:#003e7e}
+.a4{background:#f5f5f7;color:#1d1d1f}
+.post p{font-size:14px;color:var(--night-muted)}
+.post p b{color:var(--night-ink);font-weight:600;display:block}
+
+/* team */
+.member{justify-items:center;text-align:center}
+.avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g2));display:grid;place-items:center;color:#fff;font-size:32px;font-weight:700;margin-bottom:.4rem}
+
+/* flow */
+.flow{display:grid}
+.flow > div{display:grid;grid-template-columns:9rem 1fr;gap:1.5rem;padding:1.6rem 0;border-top:1px solid var(--line)}
+.flow > div > *{min-width:0}
+.flow .k{font-size:14px;font-weight:600;color:var(--muted);padding-top:.35rem}
+@media (max-width:600px){.flow > div{grid-template-columns:1fr;gap:.3rem}}
+
+.nextlink{text-align:center;font-size:19px;font-weight:500}
+
+footer{background:var(--alt);font-size:12px;color:var(--muted);letter-spacing:-.01em}
+footer .in{padding-block:2rem 2.5rem;display:grid;gap:1rem}
+footer nav{display:flex;flex-wrap:wrap;gap:.3rem 0}
+footer nav a{color:var(--muted);padding-right:.8rem;margin-right:.8rem;border-right:1px solid var(--line)}
+footer nav a:last-child{border-right:0}
+footer .rule{border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:no-preference){.page.on > .band:first-child .in{animation:up .6s cubic-bezier(.2,.7,.2,1)}}
+@keyframes up{from{transform:translateY(14px)}to{transform:none}}
+</style>
+</head>
+<body>
+<header class="gnav">
+  <div class="in wide">
+    <a class="logo" href="#home" aria-label="GrantMatch home">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fa35c"/><stop offset="1" stop-color="#0a8f9e"/></linearGradient></defs><rect width="20" height="20" rx="6" fill="url(#lg)"/><path d="M5.5 10.4l3 3 6-6.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      GrantMatch
+    </a>
+    <nav aria-label="Site">
+      <a href="#how-it-works">How it works</a>
+      <a href="#students">Students</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#marketing">Marketing</a>
+      <a href="#invest">Invest</a>
+      <a href="#careers">Careers</a>
+      <a href="#team">Team</a>
+      <a href="#simulation">Our simulation</a>
+    </nav>
+  </div>
+</header>
+<div class="lnav" id="lnav" hidden>
+  <div class="in wide"><b id="lnav-title">GrantMatch</b><a class="pill sm" href="#pricing">Get started</a></div>
+</div>
+
+<main>
+
+<!-- HOME -->
+<div class="page" data-page="home" data-title="GrantMatch">
+  <section class="band center">
+    <div class="in">
+      <p class="eyebrow">GrantMatch</p>
+      <h1 class="big">Grants, found.<br><span class="grad">Applications, drafted.</span></h1>
+      <p class="sub mt">Tell us about your business in ten minutes. We find the government grants you qualify for and draft the application. You pay when the money arrives.</p>
+      <div class="ctas mt2"><a class="pill" href="#pricing">Get started</a><a class="more" href="#how-it-works">See how it works</a></div>
+      <div class="stage">
+        <div class="phone" role="img" aria-label="GrantMatch app showing example grant matches for a café">
+          <div class="screen">
+            <div class="t">Your matches</div>
+            <div class="s">Café · 6 staff · British Columbia · example</div>
+            <div class="card"><div class="r"><b>Youth hiring wage subsidy</b><span class="amt">$8,400</span></div><span class="chip">Strong fit · federal</span></div>
+            <div class="card"><div class="r"><b>Digital adoption grant</b><span class="amt">$7,500</span></div><span class="chip">Strong fit · provincial</span></div>
+            <div class="card"><div class="r"><b>Local food business grant</b><span class="amt">$5,000</span></div><span class="chip blue">Possible fit · regional</span></div>
+            <div class="card"><div class="r"><b>Equipment grant, 2025</b><span class="amt">$6,000</span></div><span class="chip done">Funded ✓</span></div>
+            <div class="cta">Draft my application</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="in wide gap-l">
+      <h2 class="h2 center">Money is out there.<br>Owners don't have time to find it.</h2>
+      <div class="bento">
+        <div class="tile s2"><span class="k">The market</span><span class="stat grad">1M+</span><p>small businesses in Canada, most with no one whose job is finding funding.</p></div>
+        <div class="tile s2"><span class="k">The problem</span><span class="stat">100s</span><p>of federal, provincial and local programs, each with its own rules, deadlines and forms.</p></div>
+        <div class="tile s2"><span class="k">Our promise</span><span class="stat grad">$0</span><p>up front on our pay-when-funded plan. Not approved means nothing owed.</p></div>
+        <div class="tile s3"><h3 class="h3">Built for the café, not the corporation.</h3><p>A café owner or a two-person trades company usually hears about a grant after the deadline, or never. Consultants exist, but few small businesses can afford one for a $5,000 application. GrantMatch does the searching, the eligibility rules and the first draft. The owner answers questions, reviews, and submits.</p></div>
+        <div class="tile s3"><h3 class="h3">It gets <span class="grad">smarter</span> with every application.</h3><p>Grant listings are mostly public. <b>Which applications actually got funded</b> isn't. Every application through GrantMatch teaches us what wins, so our matches and drafts improve with every customer. A newcomer starts with none of that.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band night center">
+    <div class="in stack">
+      <p class="eyebrow">GrantMatch Students</p>
+      <h2 class="h2">Scholarships you qualify for.<br><span class="grad">Free. Always.</span></h2>
+      <p class="sub">Businesses pay for GrantMatch. Students never do.</p>
+      <div class="ctas"><a class="more" href="#students">Learn about GrantMatch Students</a></div>
+    </div>
+  </section>
+
+  <section class="band"><div class="in nextlink"><a class="more" href="#how-it-works">Next: how it works</a></div></section>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="page" data-page="how-it-works" data-title="How it works" hidden>
+  <section class="band center">
+    <div class="in stack">
+      <h1 class="big">Profile to funded.<br><span class="grad">Four steps.</span></h1>
+      <p class="sub">GrantMatch is a web app that works on any phone or laptop. Here's what a business owner does, and what happens behind the scenes.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><span class="num grad">1</span><h3 class="h3">Build your profile.</h3><p>Ten minutes of plain questions: industry, province, number of employees, revenue range, and what you plan to do this year, such as hiring, exporting or going digital.</p></div>
+        <div class="tile s3"><span class="num grad">2</span><h3 class="h3">Get your matches.</h3><p>We check your profile against every program in our database and rank each one by fit, amount and deadline, with a plain-language reason for every match.</p></div>
+        <div class="tile s3"><span class="num grad">3</span><h3 class="h3">Review the draft.</h3><p>Pick a grant and GrantMatch drafts the application from your answers. On paid plans, a human grant advisor reviews it before you see it.</p></div>
+        <div class="tile s3"><span class="num grad">4</span><h3 class="h3">Submit and track.</h3><p>You submit through the funder's own portal. We remind you of deadlines, follow-ups and the reports most grants require after the money arrives.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><h3 class="h3">What you get.</h3>
+          <ul class="list"><li>Money you didn't know you qualified for.</li><li>A weekend of reading program guides turned into an hour of review.</li><li>No missed deadlines or follow-up reports.</li><li>Nothing to pay up front on the pay-when-funded plan.</li></ul></div>
+        <div class="tile s3"><h3 class="h3">Where we operate.</h3><p>GrantMatch is built and run from a small office in Vancouver, BC, and offered online across Canada. There's no physical product and nothing to warehouse. Our inventory is the grant database, stored on Canadian cloud servers.</p><p>We launch in British Columbia first, where we know the programs best, then add provinces one at a time.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in gap-l">
+      <h2 class="h2 center">Behind the scenes.</h2>
+      <div class="spec"><table>
+        <thead><tr><th>Stage</th><th>Who</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><th>Collect grants</th><td>Grant data researchers</td><td>Track federal, provincial and municipal programs and regional development agencies. Record rules, amounts, deadlines and forms.</td></tr>
+          <tr><th>Encode rules</th><td>Researchers and engineers</td><td>Turn each program's eligibility rules into checks the matching system can run.</td></tr>
+          <tr><th>Match</th><td>AI matching</td><td>Scores each business against every open program and explains the fit.</td></tr>
+          <tr><th>Draft</th><td>AI, reviewed by a grant advisor</td><td>Writes the application from the owner's own answers. Nothing is invented. Missing facts become questions for the owner.</td></tr>
+          <tr><th>Submit</th><td>The business owner</td><td>Submits through the funder's portal, so the application stays theirs.</td></tr>
+          <tr><th>Learn</th><td>GrantMatch</td><td>Records whether it was funded, which improves future matches and drafts.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="fine center">Suppliers: Canadian cloud hosting, an AI model provider, and public program information. Business data is handled under Canada's private-sector privacy law (PIPEDA), and owners can delete their data at any time.</p>
+    </div>
+  </section>
+  <section class="band"><div class="in nextlink"><a class="more" href="#students">Next: GrantMatch Students</a></div></section>
+</div>
+
+<!-- STUDENTS -->
+<div class="page" data-page="students" data-title="Students" hidden>
+  <section class="band night center">
+    <div class="in">
+      <p class="eyebrow">GrantMatch Students</p>
+      <h1 class="big">Scholarships you qualify for.<br><span class="grad">Free.</span></h1>
+      <p class="sub mt">The same matching that finds grants for businesses finds scholarships, bursaries and student grants for you. Businesses pay for GrantMatch. Students never do.</p>
+      <div class="stage">
+        <div class="phone" role="img" aria-label="GrantMatch Students app showing example scholarship matches">
+          <div class="screen dark">
+            <div class="t">For you</div>
+            <div class="s">BC college · year 1 · business · example</div>
+            <div class="card"><div class="r"><b>College entrance bursary</b><span class="amt">$1,000</span></div><span class="chip">Due in 12 days</span></div>
+            <div class="card"><div class="r"><b>Community volunteer award</b><span class="amt">$2,500</span></div><span class="chip">Due in 30 days</span></div>
+            <div class="card"><div class="r"><b>Government student grant</b><span class="amt">Varies</span></div><span class="chip blue">Apply with student aid</span></div>
+            <div class="cta">Add to my calendar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s2"><span class="k">Find</span><h3 class="h3">Every award you qualify for.</h3><p>Scholarships, bursaries and grants from schools, governments and private donors.</p></div>
+        <div class="tile s2"><span class="k">Organize</span><h3 class="h3">Never miss a deadline.</h3><p>A deadline calendar and a document checklist for each application.</p></div>
+        <div class="tile s2"><span class="k">Improve</span><h3 class="h3">Feedback on your essays.</h3><p>Structure, clarity, and whether you actually answered the question.</p></div>
+        <div class="tile s3"><h3 class="h3">Your words. Always.</h3><p>Many scholarships require the student's own writing, and an AI-written essay could get an application rejected. For businesses, GrantMatch drafts. For students, it finds, organizes and gives feedback. We don't write scholarship essays.</p></div>
+        <div class="tile s3"><h3 class="h3">Why it's free.</h3><p>Students are tomorrow's business owners and today's word of mouth. Business revenue pays for the student side, and it builds the GrantMatch name on every campus we reach. Colleges could later license it for their financial aid offices. Students will never pay.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band"><div class="in nextlink"><a class="more" href="#pricing">Next: pricing</a></div></section>
+</div>
+
+<!-- PRICING -->
+<div class="page" data-page="pricing" data-title="Pricing" hidden>
+  <section class="band center">
+    <div class="in stack">
+      <h1 class="big">Pay when you're funded.<br><span class="grad">Or pay monthly.</span></h1>
+      <p class="sub">Every business sees its matches free. To get applications drafted, choose the plan that fits how often you apply.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide gap-l">
+      <div class="plans">
+        <div class="plan"><span class="tag">&nbsp;</span><h3 class="h3">Starter</h3><div class="price">$0</div><span class="per">free forever</span>
+          <ul><li>Business profile</li><li>All your matches, with fit scores</li><li>Deadline reminders</li></ul></div>
+        <div class="plan pick"><span class="tag">Most popular</span><h3 class="h3">Pay when funded</h3><div class="price">8%</div><span class="per">of the award, capped at $4,000</span>
+          <ul><li>AI-drafted applications</li><li>Grant advisor review</li><li>No monthly fee</li><li>Nothing owed if not approved</li></ul></div>
+        <div class="plan"><span class="tag">&nbsp;</span><h3 class="h3">Pro</h3><div class="price">$29</div><span class="per">per month</span>
+          <ul><li>Unlimited AI drafts</li><li>Grant advisor review</li><li>No success fee</li><li>Help with post-award reports</li></ul></div>
+      </div>
+      <p class="fine center">Success fees are invoiced to the business after the money arrives.</p>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><h3 class="h3">Why this price.</h3><p>Small businesses are short on cash, so the main plan costs nothing until it works. That also tells customers we only win when they do.</p><p>On a typical $15,000 grant, our fee is $1,200, far less than paying a consultant by the hour. The cap keeps large awards fair.</p></div>
+        <div class="tile s3"><h3 class="h3">We follow funder rules.</h3><p>Some programs don't allow grant money to pay for application help, and grant-writing ethics codes discourage percentage fees. So our fee is always billed to the business, never taken out of the grant. If a program forbids success fees, that application moves to a flat fee or the Pro plan.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band alt"><div class="in nextlink"><a class="more" href="#marketing">Next: marketing</a></div></section>
+</div>
+
+<!-- MARKETING -->
+<div class="page" data-page="marketing" data-title="Marketing" hidden>
+  <section class="band center">
+    <div class="in stack">
+      <h1 class="big">Who we're for.<br><span class="grad">How we'll reach them.</span></h1>
+      <p class="sub">We start with one clear customer: owner-run small businesses in British Columbia. Students are our second audience.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><span class="k">Primary market</span><h3 class="h3">Owner-run small businesses in BC.</h3>
+          <ul class="list"><li>1 to 49 employees, open 1 to 10 years</li><li>Food and hospitality, retail, trades and young tech companies</li><li>No accountant or staff member focused on funding</li></ul>
+          <p><b>Meet Maya.</b> She runs a six-person café in East Vancouver, wants to hire two students this summer, and has never applied for a grant because she doesn't know where to start.</p></div>
+        <div class="tile s3"><span class="k">Secondary market</span><h3 class="h3">College and university students in BC.</h3>
+          <ul class="list"><li>First- and second-year students paying their own way</li><li>Reached through campuses, clubs and student social media</li><li>Free users who spread the word</li></ul>
+          <p><b>Meet Jordan.</b> A first-year business student working part-time who knows bursaries exist but never has time to look.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in gap-l">
+      <h2 class="h2 center">The four Ps.</h2>
+      <div class="spec"><table>
+        <tbody>
+          <tr><th>Product</th><td>A web app that matches businesses to grants, drafts applications and tracks deadlines, plus a free student version for scholarships. <a class="more" href="#how-it-works">How it works</a></td></tr>
+          <tr><th>Price</th><td>Free matches. 8% of the award (capped at $4,000) when funded, or $29 a month. Free for students. <a class="more" href="#pricing">Pricing</a></td></tr>
+          <tr><th>Place</th><td>Online across Canada, starting in BC. Referral partners where owners already go for advice: accountants and bookkeepers, chambers of commerce, small business support centres and bank small-business advisors. For students: college financial aid offices and student unions.</td></tr>
+          <tr><th>Promotion</th><td>The "Unclaimed" launch campaign on Instagram, TikTok and LinkedIn, search ads for "small business grants BC", an accountant referral program, chamber of commerce events, and student ambassadors on campus.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+  <section class="band night">
+    <div class="in wide gap-l">
+      <div class="center stack">
+        <p class="eyebrow">Launch campaign</p>
+        <h2 class="h2">Unclaimed.</h2>
+        <p class="sub">One message for both audiences: there's money you qualify for that nobody has told you about. Every post ends with the same ask: check your matches free in ten minutes.</p>
+      </div>
+      <div class="posts">
+        <div class="post"><div class="art a1"><small>Instagram · business</small><span>Your café might qualify for a hiring subsidy.</span><small>Check free · 10 min</small></div><p><b>Carousel</b>Three slides: what the subsidy is, who qualifies, and how GrantMatch drafts the application.</p></div>
+        <div class="post"><div class="art a2"><small>TikTok · students</small><span>Free scholarship matching. <em>No catch.</em></span><small>Businesses pay. You don't.</small></div><p><b>15-second video</b>A student ambassador finds three bursaries on their phone between classes.</p></div>
+        <div class="post"><div class="art a3"><small>LinkedIn · owners</small><span>We get paid when you do.</span><small>8% when funded · $0 if not</small></div><p><b>Founder post</b>Why we built GrantMatch, and why our fee only comes after the grant.</p></div>
+        <div class="post"><div class="art a4"><small>Reel · trades</small><span>3 grant types every BC trades business should know.</span><small>Part 1 of 3</small></div><p><b>Explainer series</b>Plain-language walk-throughs of hiring, training and equipment programs.</p></div>
+      </div>
+      <p class="fine center">Sample posts for the launch. Grant amounts on this site are examples, not figures from a specific program.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in gap-l">
+      <h2 class="h2 center">The first month.</h2>
+      <div class="spec"><table>
+        <thead><tr><th>Week</th><th>Businesses</th><th>Students</th></tr></thead>
+        <tbody>
+          <tr><th>1 · Tease</th><td>Unbranded "Unclaimed" posts asking "Are you leaving grant money behind?"</td><td>Ambassador sign-ups at two Vancouver campuses.</td></tr>
+          <tr><th>2 · Launch</th><td>Site goes live. Founder story on LinkedIn. Search ads start.</td><td>Free accounts launch with campus tables and QR codes.</td></tr>
+          <tr><th>3 · Proof</th><td>First customer story, with permission. Accountant referral program opens.</td><td>"I found $2,500 in 10 minutes" student videos.</td></tr>
+          <tr><th>4 · Community</th><td>Free grant workshop with a local chamber of commerce.</td><td>Reminders ahead of spring bursary deadlines.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in gap-l">
+      <h2 class="h2 center">First-year marketing budget.</h2>
+      <div class="spec"><table>
+        <tbody>
+          <tr><th>Social media ads</th><td>Instagram, TikTok and LinkedIn, aimed at BC owners and students</td><td class="n">$30,000</td></tr>
+          <tr><th>Search ads</th><td>Owners already searching for grants</td><td class="n">$25,000</td></tr>
+          <tr><th>Referral rewards</th><td>Accountants earn 10% of a referred client's first-year fees</td><td class="n">$15,000</td></tr>
+          <tr><th>Events and workshops</th><td>Chamber of commerce mixers and free grant workshops</td><td class="n">$10,000</td></tr>
+          <tr><th>Student ambassadors</th><td>Paid campus ambassadors at four BC schools</td><td class="n">$10,000</td></tr>
+          <tr class="tot"><th>Total</th><td></td><td class="n">$90,000</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+  <section class="band alt"><div class="in nextlink"><a class="more" href="#invest">Next: invest in GrantMatch</a></div></section>
+</div>
+
+<!-- INVEST -->
+<div class="page" data-page="invest" data-title="Invest" hidden>
+  <section class="band night center">
+    <div class="in stack">
+      <p class="eyebrow">For investors</p>
+      <h1 class="big"><span class="grad">$600,000</span> for 12%.</h1>
+      <p class="sub">That pays for our first ten hires and 18 months of runway to launch in BC and expand across Canada.</p>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in gap-l">
+      <h2 class="h2 center">How we'll fund it.</h2>
+      <div class="flow">
+        <div><span class="k">Start-up</span><div class="stack"><h3 class="h3">Bootstrap the first version for about $15,000.</h3><p class="muted">The founders build the first version and the BC grant database, paid for with our own savings and a youth start-up loan with mentoring (for example, Futurpreneur Canada). We'll also run GrantMatch on ourselves and apply for the youth and innovation programs we qualify for.</p></div></div>
+        <div><span class="k">Launch</span><div class="stack"><h3 class="h3">Raise $600,000 from angel investors.</h3><p class="muted">Hire the ten roles on our <a href="#careers">Careers page</a>, launch in BC, and prove that funded applications turn into revenue.</p></div></div>
+        <div><span class="k">Growth</span><div class="stack"><h3 class="h3">Revenue, then a larger round.</h3><p class="muted">Fees from funded applications pay for each new province. Once revenue covers costs, a venture capital round funds national expansion and the student product. Innovation programs for tech companies can fund our own research.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><h3 class="h3">Start-up costs.</h3>
+          <div class="spec narrow"><table><tbody>
+            <tr><th>Incorporation and legal</th><td class="n">$2,000</td></tr>
+            <tr><th>Privacy and security review</th><td class="n">$2,500</td></tr>
+            <tr><th>Hosting, AI and software, 6 months</th><td class="n">$3,000</td></tr>
+            <tr><th>Brand and launch marketing</th><td class="n">$5,000</td></tr>
+            <tr><th>Reserve</th><td class="n">$2,500</td></tr>
+            <tr class="tot"><th>Total</th><td class="n">$15,000</td></tr>
+          </tbody></table></div></div>
+        <div class="tile s3"><h3 class="h3">Use of the $600,000.</h3>
+          <div class="spec narrow"><table><tbody>
+            <tr><th>First ten hires, phased in</th><td class="n">65%</td><td class="n">$390,000</td></tr>
+            <tr><th>Marketing</th><td class="n">15%</td><td class="n">$90,000</td></tr>
+            <tr><th>Data, cloud and AI</th><td class="n">10%</td><td class="n">$60,000</td></tr>
+            <tr><th>Legal, privacy, insurance</th><td class="n">5%</td><td class="n">$30,000</td></tr>
+            <tr><th>Reserve</th><td class="n">5%</td><td class="n">$30,000</td></tr>
+          </tbody></table></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in wide gap-l">
+      <h2 class="h2 center">Revenue targets.</h2>
+      <div class="bento">
+        <div class="tile s2 center"><span class="k">Year 1 · BC</span><span class="stat">$412K</span><p>300 funded applications, 150 Pro subscribers</p></div>
+        <div class="tile s2 center"><span class="k">Year 2 · BC, AB, ON</span><span class="stat">$1.65M</span><p>1,200 funded applications, 600 Pro subscribers</p></div>
+        <div class="tile s2 center"><span class="k">Year 3 · Canada</span><span class="stat grad">$4.1M</span><p>3,000 funded applications, 1,500 Pro subscribers</p></div>
+      </div>
+      <p class="fine center">Targets, not results. They assume an average fee of $1,200 per funded application (8% of a $15,000 grant) plus $29 a month per Pro subscriber. Year 1 runs at a loss, which the $600,000 covers. Year 2 is our break-even target.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><h3 class="h3">Who we compete with.</h3>
+          <ul class="list"><li><b>Free government benefit finders</b> list programs but don't write applications.</li><li><b>Grant consultants</b> write applications but cost too much for small grants.</li><li><b>Scholarship search sites</b> list awards but don't track or advise.</li></ul></div>
+        <div class="tile s3"><h3 class="h3">Why we <span class="grad">win.</span></h3><p>We're the only option that finds, drafts and tracks in one place, and charges only when it works. Every funded application adds to data no competitor has.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band"><div class="in nextlink"><a class="more" href="#careers">Next: careers</a></div></section>
+</div>
+
+<!-- CAREERS -->
+<div class="page" data-page="careers" data-title="Careers" hidden>
+  <section class="band center">
+    <div class="in stack">
+      <p class="eyebrow">Careers · Vancouver · Hybrid</p>
+      <h1 class="big">Join the <span class="grad">first ten.</span></h1>
+      <p class="sub">Every role here is a first hire, so each person shapes how GrantMatch works. Full-time roles include extended health benefits after three months, hybrid work and stock options.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><span class="k">Engineering</span><h3 class="h3">Lead software engineer</h3><span class="pay grad">$95,000 + stock options</span><p>Builds and runs the web app, accounts and security.</p><p><b>Skills:</b> 4+ years of web development, cloud hosting, handling sensitive data.</p></div>
+        <div class="tile s3"><span class="k">Engineering</span><h3 class="h3">AI engineer</h3><span class="pay grad">$100,000 + stock options</span><p>Builds the matching and drafting systems and measures how often drafts get funded.</p><p><b>Skills:</b> building with large language models, testing AI output, Python.</p></div>
+        <div class="tile s2"><span class="k">Research · 2 roles</span><h3 class="h3">Grant data researcher</h3><span class="pay grad">$55,000 each</span><p>Keeps every program in our database current: rules, amounts, deadlines and forms.</p><p><b>Skills:</b> careful reading of government documents, spreadsheets, attention to detail.</p></div>
+        <div class="tile s2"><span class="k">Customers</span><h3 class="h3">Grant writing advisor</h3><span class="pay grad">$65,000 + $50 per funded application</span><p>Reviews AI drafts before customers see them and coaches owners on strong applications.</p><p><b>Skills:</b> 3+ years writing funded grant applications, clear writing.</p></div>
+        <div class="tile s2"><span class="k">Customers</span><h3 class="h3">Customer success specialist</h3><span class="pay grad">$50,000</span><p>Helps new businesses set up profiles and answers questions by chat and phone.</p><p><b>Skills:</b> customer service, patience, explaining things plainly.</p></div>
+        <div class="tile s2"><span class="k">Growth</span><h3 class="h3">Marketing and social media coordinator</h3><span class="pay grad">$52,000</span><p>Runs the "Unclaimed" campaign, our social accounts and the ambassador program.</p><p><b>Skills:</b> short-form video, Instagram and TikTok, writing for owners.</p></div>
+        <div class="tile s2"><span class="k">Growth</span><h3 class="h3">Partnerships manager</h3><span class="pay grad">$60,000 + 5% commission on partner revenue</span><p>Signs up accountants, chambers of commerce and colleges as referral partners.</p><p><b>Skills:</b> B2B sales, networking, a BC small-business network.</p></div>
+        <div class="tile s2"><span class="k">Part-time</span><h3 class="h3">Student community lead</h3><span class="pay grad">$22/hour · 20 hours a week</span><p>Leads campus ambassadors and grows the scholarship side.</p><p><b>Skills:</b> current or recent student, event planning, social media.</p></div>
+        <div class="tile s6"><span class="k">Part-time</span><h3 class="h3">Bookkeeper and office manager</h3><span class="pay grad">$30/hour · 15 hours a week</span><p>Billing, payroll, success-fee invoices and office operations. <b>Skills:</b> bookkeeping software, invoicing, organization.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band center">
+    <div class="in stack">
+      <h2 class="h2">How we pay.</h2>
+      <p class="sub">Salaries near the Vancouver market rate for each role. Stock options reward the technical hires who join before revenue. Customer-facing roles earn bonuses tied to funded applications and partner revenue, so pay rises when customers succeed. Part-time roles are hourly, and a privacy lawyer is hired on contract as needed.</p>
+    </div>
+  </section>
+  <section class="band alt"><div class="in nextlink"><a class="more" href="#team">Next: meet the team</a></div></section>
+</div>
+
+<!-- TEAM -->
+<div class="page" data-page="team" data-title="Team" hidden>
+  <section class="band center">
+    <div class="in stack">
+      <h1 class="big">The people behind <span class="grad">GrantMatch.</span></h1>
+      <p class="sub">Business students at Langara College who ran the most profitable store in our class's Enterprise Donuts simulation, and want to help other small businesses find the money they're missing.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s2 member"><div class="avatar">1</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
+        <div class="tile s2 member"><div class="avatar">2</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
+        <div class="tile s2 member"><div class="avatar">3</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
+        <div class="tile s3 member"><div class="avatar">4</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
+        <div class="tile s3 member"><div class="avatar">5</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band"><div class="in nextlink"><a class="more" href="#simulation">Next: our simulation</a></div></section>
+</div>
+
+<!-- SIMULATION -->
+<div class="page" data-page="simulation" data-title="Our simulation" hidden>
+  <section class="band center">
+    <div class="in stack">
+      <p class="eyebrow">Enterprise Donuts · Store #4, Donuts Delight</p>
+      <h1 class="big">How we made<br><span class="grad">decisions.</span></h1>
+      <p class="sub">Before GrantMatch, we ran Donuts Delight in the Enterprise Donuts simulation, and finished as the top profit producer in the class.</p>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s2 center"><span class="k">Total profit, June to October</span><span class="stat grad">$8,040</span><p>Highest in the class. The final report named us top profit producer.</p></div>
+        <div class="tile s2 center"><span class="k">Vs. the Company Store</span><span class="stat">137%</span><p>$8,038 to $5,855 on the instructor's standings.</p></div>
+        <div class="tile s2 center"><span class="k">Missed sales</span><span class="stat">0</span><p>In all five months. We never turned a customer away.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in wide gap-l">
+      <div class="center stack"><h2 class="h2">Our process, every month.</h2><p class="sub">We decided by consensus, not by vote. AI acted like an outside expert we could question, but the decisions were ours.</p></div>
+      <div class="bento">
+        <div class="tile s3"><span class="num grad">1</span><h3 class="h3">Analyze the report.</h3><p>We read the management report together: sales, returns, costs, and every store's prices and profit.</p></div>
+        <div class="tile s3"><span class="num grad">2</span><h3 class="h3">Talk it through.</h3><p>We discussed what happened and listed options for prices, orders, staffing and advertising.</p></div>
+        <div class="tile s3"><span class="num grad">3</span><h3 class="h3">Check with AI.</h3><p>We asked an AI assistant to check our options for missing information, using the manual's rules and our past results. Our instructor allowed this.</p></div>
+        <div class="tile s3"><span class="num grad">4</span><h3 class="h3">Decide together.</h3><p>We made the final call as a group and filled in the team decision form.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s4"><h3 class="h3">Conflicts, and how we resolved them.</h3><p>We had no major conflicts. When someone disagreed or was unsure, we checked the question against the data before deciding.</p>
+          <ul class="list">
+            <li><b>Pastry prices.</b> Why charge so much for pastries? We compared the profit per dozen at different prices before agreeing.</li>
+            <li><b>Our best seller.</b> Wasn't cake the most popular? The sales history showed raised donuts sold the most.</li>
+            <li><b>Returns.</b> Could we really return leftovers for 80% credit? We found the rule in the manual before ordering extra stock.</li>
+            <li><b>Competitor prices.</b> What if rivals kept prices low and took our customers? Market share across stores barely moved with price.</li>
+          </ul></div>
+        <div class="tile s2"><h3 class="h3">Meetings.</h3><p>We met mostly in class, where we reviewed each report together, and kept working in an Instagram group chat between classes.</p><p>Questions got answered quickly, nobody waited a week for a decision, and everyone took part in agreeing on each form.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="in gap-l">
+      <h2 class="h2 center">Month by month.</h2>
+      <div class="spec"><table>
+        <thead><tr><th>Month</th><th>Key decision</th><th class="n">Profit</th></tr></thead>
+        <tbody>
+          <tr><th>Trial</th><td>Used the trial to test pricing and pastries, since trial results reset. We were the only profitable store.</td><td class="n">$271.56</td></tr>
+          <tr><th>June</th><td>Set premium prices and ordered enough to earn the 5% bulk discount.</td><td class="n">$1,006.93</td></tr>
+          <tr><th>July</th><td>Raised prices to cover the bakery's 5% cost increase.</td><td class="n">$945.43</td></tr>
+          <tr><th>August</th><td>Raised prices again as wages rose.</td><td class="n">$1,282.03</td></tr>
+          <tr><th>September</th><td>Raised cake and raised-donut prices as rivals moved higher, and added staff for the award boost.</td><td class="n">$2,177.70</td></tr>
+          <tr><th>October</th><td>Raised prices for Halloween, staffed for 2,087 dozen and dropped market research.</td><td class="n">$3,128.03</td></tr>
+          <tr class="tot"><th>Total</th><td>June to October, after May's −$500 starting loss</td><td class="n">$8,040.11</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="in gap-l">
+      <h2 class="h2 center">Final standings, Metropolis.</h2>
+      <div class="spec narrow"><table>
+        <tbody>
+          <tr class="us"><th><span class="grad">Donuts Delight (us)</span></th><td class="n">$8,038</td></tr>
+          <tr><th>Bakery Café</th><td class="n">$7,052</td></tr>
+          <tr><th>McLovings Donuts</th><td class="n">$6,872</td></tr>
+          <tr><th>The Donut Lab</th><td class="n">$6,773</td></tr>
+          <tr><th>Company Store</th><td class="n">$5,855</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="in wide">
+    <p>GrantMatch is a concept business created for a college course. Grant amounts shown are examples. Revenue figures are targets.</p>
+    <div class="rule"></div>
+    <nav aria-label="Site map">
+      <a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#students">Students</a><a href="#pricing">Pricing</a><a href="#marketing">Marketing</a><a href="#invest">Invest</a><a href="#careers">Careers</a><a href="#team">Team</a><a href="#simulation">Our simulation</a>
+    </nav>
+    <p>BUSM 1115-002 Entrepreneurship · Langara School of Management, Langara College · Instructor: Deland Jessop · Simulation store: Donuts Delight (Store #4, Metropolis) · Submitted November 17, 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('.page'));
+  var links=[].slice.call(document.querySelectorAll('.gnav nav a'));
+  var lnav=document.getElementById('lnav'), lt=document.getElementById('lnav-title');
+  function show(){
+    var id=(location.hash||'#home').slice(1);
+    if(!pages.some(function(p){return p.dataset.page===id})) id='home';
+    var title='GrantMatch';
+    pages.forEach(function(p){var on=p.dataset.page===id;p.hidden=!on;p.classList.toggle('on',on);if(on)title=p.dataset.title});
+    links.forEach(function(a){a.getAttribute('href')==='#'+id?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+    lnav.hidden=(id==='home'); lt.textContent=title;
+    document.title=id==='home'?'GrantMatch':'GrantMatch · '+title;
+  }
+  window.addEventListener('hashchange',function(){show();window.scrollTo(0,0)});
+  show();
+})();
+</script>
+
+</body>
+</html>
