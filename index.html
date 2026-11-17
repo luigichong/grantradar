@@ -94,6 +94,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;background:#e3f5ea;color:#137a43;justify-self:start}
 .chip.blue{background:#e5f0fd;color:#0066cc}
 .chip.done{background:#137a43;color:#fff}
+.chip.spon{background:#fff1d6;color:#8a5a00}
+.screen.dark .chip.spon{background:#3d2e10;color:#ffc861}
+.slogan{font-size:clamp(20px,2.6vw,28px);font-weight:600;letter-spacing:-.02em;line-height:1.25;margin:1rem auto 0;max-width:34rem}
+.night .slogan{color:var(--night-ink)}
+.member .k{display:block;margin-top:.2rem}
 .screen .cta{margin-top:4px;background:#0071e3;color:#fff;border-radius:12px;text-align:center;font-size:13.5px;font-weight:600;padding:10px}
 .screen.dark{background:#1c1c1e;color:#f5f5f7}
 .screen.dark .card{background:#2c2c2e}
@@ -198,6 +203,7 @@ footer .rule{border-top:1px solid var(--line)}
     <nav aria-label="Site">
       <a href="#how-it-works">How it works</a>
       <a href="#students">Students</a>
+      <a href="#partners">Partners</a>
       <a href="#pricing">Pricing</a>
       <a href="#marketing">Marketing</a>
       <a href="#invest">Invest</a>
@@ -219,6 +225,7 @@ footer .rule{border-top:1px solid var(--line)}
     <div class="in">
       <p class="eyebrow">GrantMatch</p>
       <h1 class="big">Grants, found.<br><span class="grad">Applications, drafted.</span></h1>
+      <p class="slogan">Skip the messy applications. Spend your time on what matters.</p>
       <p class="sub mt">Tell us about your business in ten minutes. We find the government grants you qualify for and draft the application. You pay when the money arrives.</p>
       <div class="ctas mt2"><a class="pill" href="#pricing">Get started</a><a class="more" href="#how-it-works">See how it works</a></div>
       <div class="stage">
@@ -254,8 +261,8 @@ footer .rule{border-top:1px solid var(--line)}
     <div class="in stack">
       <p class="eyebrow">GrantMatch Students</p>
       <h2 class="h2">Scholarships you qualify for.<br><span class="grad">Free. Always.</span></h2>
-      <p class="sub">Businesses pay for GrantMatch. Students never do.</p>
-      <div class="ctas"><a class="more" href="#students">Learn about GrantMatch Students</a></div>
+      <p class="sub">Businesses and partners pay for GrantMatch. Students never do.</p>
+      <div class="ctas"><a class="more" href="#students">Learn about GrantMatch Students</a><a class="more" href="#partners">Offer a scholarship</a></div>
     </div>
   </section>
 
@@ -315,7 +322,7 @@ footer .rule{border-top:1px solid var(--line)}
     <div class="in">
       <p class="eyebrow">GrantMatch Students</p>
       <h1 class="big">Scholarships you qualify for.<br><span class="grad">Free.</span></h1>
-      <p class="sub mt">The same matching that finds grants for businesses finds scholarships, bursaries and student grants for you. Businesses pay for GrantMatch. Students never do.</p>
+      <p class="sub mt">The same matching that finds grants for businesses finds scholarships, bursaries and student grants for you. Businesses and partners pay for GrantMatch. Students never do.</p>
       <div class="stage">
         <div class="phone" role="img" aria-label="GrantMatch Students app showing example scholarship matches">
           <div class="screen dark">
@@ -337,7 +344,67 @@ footer .rule{border-top:1px solid var(--line)}
         <div class="tile s2"><span class="k">Organize</span><h3 class="h3">Never miss a deadline.</h3><p>A deadline calendar and a document checklist for each application.</p></div>
         <div class="tile s2"><span class="k">Improve</span><h3 class="h3">Feedback on your essays.</h3><p>Structure, clarity, and whether you actually answered the question.</p></div>
         <div class="tile s3"><h3 class="h3">Your words. Always.</h3><p>Many scholarships require the student's own writing, and an AI-written essay could get an application rejected. For businesses, GrantMatch drafts. For students, it finds, organizes and gives feedback. We don't write scholarship essays.</p></div>
-        <div class="tile s3"><h3 class="h3">Why it's free.</h3><p>Students are tomorrow's business owners and today's word of mouth. Business revenue pays for the student side, and it builds the GrantMatch name on every campus we reach. Colleges could later license it for their financial aid offices. Students will never pay.</p></div>
+        <div class="tile s3"><h3 class="h3">Why it's free.</h3><p>Partners pay so students don't. Employers, companies and foundations pay to reach students who qualify for their scholarships (see <a href="#partners">Partners</a>). Students are also tomorrow's business owners and today's word of mouth, so the student side builds the GrantMatch name on every campus we reach. Students will never pay.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="band"><div class="in nextlink"><a class="more" href="#partners">Next: partners</a></div></section>
+</div>
+
+<!-- PARTNERS -->
+<div class="page" data-page="partners" data-title="Partners" hidden>
+  <section class="band night center">
+    <div class="in">
+      <p class="eyebrow">GrantMatch Partners</p>
+      <h1 class="big">Have money to give?<br><span class="grad">Reach who qualifies.</span></h1>
+      <p class="sub mt">Employers, companies and foundations pay to put their scholarships and grants in front of the people who actually qualify for them. That's what keeps GrantMatch free for students.</p>
+      <div class="stage">
+        <div class="phone" role="img" aria-label="GrantMatch Students app showing a sponsored work-to-earn scholarship next to regular matches">
+          <div class="screen dark">
+            <div class="t">For you</div>
+            <div class="s">BC college · year 1 · business · example</div>
+            <div class="card"><div class="r"><b>Work-to-earn scholarship, local café</b><span class="amt">$1,500</span></div><span class="chip spon">Sponsored · paid part-time job</span></div>
+            <div class="card"><div class="r"><b>College entrance bursary</b><span class="amt">$1,000</span></div><span class="chip">Due in 12 days</span></div>
+            <div class="card"><div class="r"><b>Community volunteer award</b><span class="amt">$2,500</span></div><span class="chip">Due in 30 days</span></div>
+            <div class="cta">Apply with my profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="in wide gap-l">
+      <h2 class="h2 center">Three ways to partner.</h2>
+      <div class="bento">
+        <div class="tile s2"><span class="k">Featured listing</span><span class="stat grad">$300</span><p>per month, per opportunity. Your scholarship or grant is shown, marked Sponsored, to every student or business that meets its rules, with reminders before the deadline.</p></div>
+        <div class="tile s2"><span class="k">Pay per applicant</span><span class="stat grad">$20</span><p>per qualified applicant. No monthly fee. You pay only when someone who meets your criteria starts an application.</p></div>
+        <div class="tile s2"><span class="k">Work-to-earn scholarship</span><span class="stat grad">$500</span><p>per student hired. You offer a scholarship to students who work for you, for example $1,500 toward tuition after 300 hours. We help design it, match students, and track the hours.</p></div>
+      </div>
+      <p class="fine center">Partner prices are launch estimates. Our fee is always separate from the award and never comes out of a student's scholarship.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="in gap-l">
+      <div class="center stack"><h2 class="h2">One platform. <span class="grad">Both sides win.</span></h2><p class="sub">Work-to-earn scholarships connect our two audiences. Here's how a café on GrantMatch ends up helping pay a student's tuition.</p></div>
+      <div class="flow">
+        <div><span class="k">1 · Business</span><div class="stack"><h3 class="h3">A café owner finds a youth hiring subsidy.</h3><p class="muted">GrantMatch matches the café to a wage subsidy for hiring a young worker, and drafts the application.</p></div></div>
+        <div><span class="k">2 · Offer</span><div class="stack"><h3 class="h3">GrantMatch suggests a work-to-earn scholarship.</h3><p class="muted">The café posts a part-time job that comes with $1,500 toward tuition after 300 hours. Hiring and training new staff is expensive, and a scholarship gives students a reason to stay.</p></div></div>
+        <div><span class="k">3 · Student</span><div class="stack"><h3 class="h3">Students who qualify see it first.</h3><p class="muted">It appears in GrantMatch Students for nearby students whose schedule and program fit. They apply with the profile they already have.</p></div></div>
+        <div><span class="k">4 · Result</span><div class="stack"><h3 class="h3">Everyone gets something.</h3><p class="muted">The student gets a paid job and tuition money. The café gets a worker who stays, with part of the wage covered where the subsidy's rules allow. GrantMatch earns the $500 hire fee plus the success fee on the subsidy.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="in wide">
+      <div class="bento">
+        <div class="tile s3"><h3 class="h3">Who pays.</h3>
+          <ul class="list"><li><b>Employers who need part-time staff</b>, like cafés, retail and trades, using scholarships to hire and keep students.</li><li><b>Companies with scholarship programs</b> that want more qualified applicants.</li><li><b>Foundations and community groups</b> whose awards go unclaimed because nobody hears about them.</li><li><b>Colleges</b> promoting their own bursaries and entrance awards.</li></ul></div>
+        <div class="tile s3"><h3 class="h3">Sponsored never means <span class="grad">better.</span></h3>
+          <ul class="list"><li>Sponsored opportunities are always labelled.</li><li>They're only shown to people who meet the rules.</li><li>They never push a better-fitting match lower on the list.</li><li>We never sell student data. A partner sees a student only when that student chooses to apply.</li><li>Students never pay.</li></ul></div>
+        <div class="tile s6 center"><span class="k">When it launches</span><h3 class="h3">Year 2, alongside GrantMatch Students.</h3><p>Partner revenue isn't counted in our <a href="#invest">revenue targets</a>, so it's upside. Our partnerships manager sells it, and it pays for the free student side.</p></div>
       </div>
     </div>
   </section>
@@ -362,7 +429,7 @@ footer .rule{border-top:1px solid var(--line)}
         <div class="plan"><span class="tag">&nbsp;</span><h3 class="h3">Pro</h3><div class="price">$29</div><span class="per">per month</span>
           <ul><li>Unlimited AI drafts</li><li>Grant advisor review</li><li>No success fee</li><li>Help with post-award reports</li></ul></div>
       </div>
-      <p class="fine center">Success fees are invoiced to the business after the money arrives.</p>
+      <p class="fine center">Success fees are invoiced to the business after the money arrives. Offering a scholarship or grant instead? See <a href="#partners">partner pricing</a>.</p>
     </div>
   </section>
   <section class="band">
@@ -402,7 +469,7 @@ footer .rule{border-top:1px solid var(--line)}
       <div class="spec"><table>
         <tbody>
           <tr><th>Product</th><td>A web app that matches businesses to grants, drafts applications and tracks deadlines, plus a free student version for scholarships. <a class="more" href="#how-it-works">How it works</a></td></tr>
-          <tr><th>Price</th><td>Free matches. 8% of the award (capped at $4,000) when funded, or $29 a month. Free for students. <a class="more" href="#pricing">Pricing</a></td></tr>
+          <tr><th>Price</th><td>Free matches. 8% of the award (capped at $4,000) when funded, or $29 a month. Free for students. Partners pay to list scholarships and work-to-earn awards. <a class="more" href="#pricing">Pricing</a></td></tr>
           <tr><th>Place</th><td>Online across Canada, starting in BC. Referral partners where owners already go for advice: accountants and bookkeepers, chambers of commerce, small business support centres and bank small-business advisors. For students: college financial aid offices and student unions.</td></tr>
           <tr><th>Promotion</th><td>The "Unclaimed" launch campaign on Instagram, TikTok and LinkedIn, search ads for "small business grants BC", an accountant referral program, chamber of commerce events, and student ambassadors on campus.</td></tr>
         </tbody>
@@ -472,7 +539,7 @@ footer .rule{border-top:1px solid var(--line)}
       <div class="flow">
         <div><span class="k">Start-up</span><div class="stack"><h3 class="h3">Bootstrap the first version for about $15,000.</h3><p class="muted">The founders build the first version and the BC grant database, paid for with our own savings and a youth start-up loan with mentoring (for example, Futurpreneur Canada). We'll also run GrantMatch on ourselves and apply for the youth and innovation programs we qualify for.</p></div></div>
         <div><span class="k">Launch</span><div class="stack"><h3 class="h3">Raise $600,000 from angel investors.</h3><p class="muted">Hire the ten roles on our <a href="#careers">Careers page</a>, launch in BC, and prove that funded applications turn into revenue.</p></div></div>
-        <div><span class="k">Growth</span><div class="stack"><h3 class="h3">Revenue, then a larger round.</h3><p class="muted">Fees from funded applications pay for each new province. Once revenue covers costs, a venture capital round funds national expansion and the student product. Innovation programs for tech companies can fund our own research.</p></div></div>
+        <div><span class="k">Growth</span><div class="stack"><h3 class="h3">Revenue, then a larger round.</h3><p class="muted">Fees from funded applications pay for each new province. Once revenue covers costs, a venture capital round funds national expansion and the student product, which partner listings help pay for. Innovation programs for tech companies can fund our own research.</p></div></div>
       </div>
     </div>
   </section>
@@ -507,7 +574,7 @@ footer .rule{border-top:1px solid var(--line)}
         <div class="tile s2 center"><span class="k">Year 2 · BC, AB, ON</span><span class="stat">$1.65M</span><p>1,200 funded applications, 600 Pro subscribers</p></div>
         <div class="tile s2 center"><span class="k">Year 3 · Canada</span><span class="stat grad">$4.1M</span><p>3,000 funded applications, 1,500 Pro subscribers</p></div>
       </div>
-      <p class="fine center">Targets, not results. They assume an average fee of $1,200 per funded application (8% of a $15,000 grant) plus $29 a month per Pro subscriber. Year 1 runs at a loss, which the $600,000 covers. Year 2 is our break-even target.</p>
+      <p class="fine center">Targets, not results. They assume an average fee of $1,200 per funded application (8% of a $15,000 grant) plus $29 a month per Pro subscriber. Year 1 runs at a loss, which the $600,000 covers. Year 2 is our break-even target. Partner revenue from scholarship listings and work-to-earn hires starts in Year 2 and isn't counted here, so it's upside.</p>
     </div>
   </section>
   <section class="band alt">
@@ -540,7 +607,7 @@ footer .rule{border-top:1px solid var(--line)}
         <div class="tile s2"><span class="k">Customers</span><h3 class="h3">Grant writing advisor</h3><span class="pay grad">$65,000 + $50 per funded application</span><p>Reviews AI drafts before customers see them and coaches owners on strong applications.</p><p><b>Skills:</b> 3+ years writing funded grant applications, clear writing.</p></div>
         <div class="tile s2"><span class="k">Customers</span><h3 class="h3">Customer success specialist</h3><span class="pay grad">$50,000</span><p>Helps new businesses set up profiles and answers questions by chat and phone.</p><p><b>Skills:</b> customer service, patience, explaining things plainly.</p></div>
         <div class="tile s2"><span class="k">Growth</span><h3 class="h3">Marketing and social media coordinator</h3><span class="pay grad">$52,000</span><p>Runs the "Unclaimed" campaign, our social accounts and the ambassador program.</p><p><b>Skills:</b> short-form video, Instagram and TikTok, writing for owners.</p></div>
-        <div class="tile s2"><span class="k">Growth</span><h3 class="h3">Partnerships manager</h3><span class="pay grad">$60,000 + 5% commission on partner revenue</span><p>Signs up accountants, chambers of commerce and colleges as referral partners.</p><p><b>Skills:</b> B2B sales, networking, a BC small-business network.</p></div>
+        <div class="tile s2"><span class="k">Growth</span><h3 class="h3">Partnerships manager</h3><span class="pay grad">$60,000 + 5% commission on partner revenue</span><p>Signs up accountants, chambers of commerce and colleges as referral partners, and sells scholarship listings and work-to-earn programs to employers.</p><p><b>Skills:</b> B2B sales, networking, a BC small-business network.</p></div>
         <div class="tile s2"><span class="k">Part-time</span><h3 class="h3">Student community lead</h3><span class="pay grad">$22/hour · 20 hours a week</span><p>Leads campus ambassadors and grows the scholarship side.</p><p><b>Skills:</b> current or recent student, event planning, social media.</p></div>
         <div class="tile s6"><span class="k">Part-time</span><h3 class="h3">Bookkeeper and office manager</h3><span class="pay grad">$30/hour · 15 hours a week</span><p>Billing, payroll, success-fee invoices and office operations. <b>Skills:</b> bookkeeping software, invoicing, organization.</p></div>
       </div>
@@ -566,11 +633,12 @@ footer .rule{border-top:1px solid var(--line)}
   <section class="band alt">
     <div class="in wide">
       <div class="bento">
-        <div class="tile s2 member"><div class="avatar">1</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
-        <div class="tile s2 member"><div class="avatar">2</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
-        <div class="tile s2 member"><div class="avatar">3</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
-        <div class="tile s3 member"><div class="avatar">4</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
-        <div class="tile s3 member"><div class="avatar">5</div><h3 class="h3">[Full name]</h3><span class="k">[Role] · Student # [000000000]</span><p>[One or two lines of bio.]</p></div>
+        <div class="tile s2 member center"><div class="avatar" style="margin-inline:auto">LR</div><h3 class="h3">Luigi Reyes</h3><span class="k">Co-founder</span><span class="k">Student # 100447433</span></div>
+        <div class="tile s2 member center"><div class="avatar" style="margin-inline:auto">NR</div><h3 class="h3">Nicholas Reyes</h3><span class="k">Co-founder</span><span class="k">Student # 100447434</span></div>
+        <div class="tile s2 member center"><div class="avatar" style="margin-inline:auto">GD</div><h3 class="h3">Gurshaan Dhillon</h3><span class="k">Co-founder</span><span class="k">Student # 100455708</span></div>
+        <div class="tile s2 member center"><div class="avatar" style="margin-inline:auto">PJ</div><h3 class="h3">Pavel Janevski</h3><span class="k">Co-founder</span><span class="k">Student # 100445057</span></div>
+        <div class="tile s2 member center"><div class="avatar" style="margin-inline:auto">JC</div><h3 class="h3">Jason Chen</h3><span class="k">Co-founder</span><span class="k">Student # 100442068</span></div>
+        <div class="tile s2 member center"><div class="avatar" style="margin-inline:auto">DH</div><h3 class="h3">Dylan Heer</h3><span class="k">Co-founder</span><span class="k">Student # 100432501</span></div>
       </div>
     </div>
   </section>
@@ -657,10 +725,11 @@ footer .rule{border-top:1px solid var(--line)}
 
 <footer>
   <div class="in wide">
+    <p><b>GrantMatch.</b> Skip the messy applications. Spend your time on what matters.</p>
     <p>GrantMatch is a concept business created for a college course. Grant amounts shown are examples. Revenue figures are targets.</p>
     <div class="rule"></div>
     <nav aria-label="Site map">
-      <a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#students">Students</a><a href="#pricing">Pricing</a><a href="#marketing">Marketing</a><a href="#invest">Invest</a><a href="#careers">Careers</a><a href="#team">Team</a><a href="#simulation">Our simulation</a>
+      <a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#students">Students</a><a href="#partners">Partners</a><a href="#pricing">Pricing</a><a href="#marketing">Marketing</a><a href="#invest">Invest</a><a href="#careers">Careers</a><a href="#team">Team</a><a href="#simulation">Our simulation</a>
     </nav>
     <p>BUSM 1115-002 Entrepreneurship · Langara School of Management, Langara College · Instructor: Deland Jessop · Simulation store: Donuts Delight (Store #4, Metropolis) · Submitted November 17, 2026</p>
   </div>
