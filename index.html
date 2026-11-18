@@ -172,6 +172,12 @@ ul.list li b{color:var(--ink);font-weight:600}
 .posts > *{min-width:0}
 @media (max-width:900px){.posts{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.posts{grid-template-columns:1fr}}
+.ads-video{display:grid;grid-template-columns:repeat(2,minmax(0,300px));justify-content:center;gap:28px}
+@media (max-width:560px){.ads-video{grid-template-columns:minmax(0,300px)}}
+.post img,.post video{width:100%;height:auto;border-radius:20px;display:block;background:#000}
+.carousel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(190px,1fr);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.carousel img{scroll-snap-align:start;width:100%;height:auto;border-radius:16px;display:block}
+.adlabel{font:600 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--night-muted)}
 .post{display:grid;gap:.7rem;align-content:start}
 .art{aspect-ratio:4/5;max-width:100%;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;font:700 24px/1.08 var(--display);letter-spacing:-.03em}
 .art small{font:600 10.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.85}
@@ -450,7 +456,7 @@ footer .tagline span{color:var(--accent)}
           <tr><th>Product</th><td>A web app that matches businesses to grants, drafts advisor-reviewed applications and tracks deadlines and post-award reports. <a class="more" href="#how-it-works">How it works</a></td></tr>
           <tr><th>Price</th><td>Free matches. One flat fee per application ($399, $899 or $1,799, by grant size), with loyalty discounts for repeat applicants. Pro is $149 a month with a 6-month minimum. No success fee. Clients keep 100% of their grant. <a class="more" href="#pricing">Pricing</a></td></tr>
           <tr><th>Place</th><td>Online, direct to customers, starting in BC. No wholesaler or retailer. Referral partners send owners to us from the places they already go for advice: accountants and bookkeepers, chambers of commerce, business improvement associations and small business support centres.</td></tr>
-          <tr><th>Promotion</th><td>The "Spots grants you'd miss" launch campaign on Instagram, Facebook and LinkedIn, search ads for "small business grants BC", an accountant referral program, chamber of commerce workshops, and an outreach rep visiting local business associations.</td></tr>
+          <tr><th>Promotion</th><td>The "Spots grants you'd miss" launch campaign on Instagram, Facebook and LinkedIn, with short videos and a trades carousel, search ads for "small business grants BC", an accountant referral program, chamber of commerce workshops, and an outreach rep visiting local business associations.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -462,13 +468,27 @@ footer .tagline span{color:var(--accent)}
         <h2 class="h2">Spots grants <span class="grad">you'd miss.</span></h2>
         <p class="sub">One message: there's money your business qualifies for that nobody has told you about. Every post ends with the same ask: check your matches free in ten minutes.</p>
       </div>
-      <div class="posts">
-        <div class="post"><div class="art a1"><small>Instagram · cafés</small><span>Your café might qualify for a <em>hiring subsidy.</em></span><small>Check free · 10 min</small></div><p><b>Carousel</b>Three slides: what the subsidy is, who qualifies, and how GrantRadar drafts the application.</p></div>
-        <div class="post"><div class="art a2"><small>LinkedIn · owners</small><span>Keep your whole grant.</span><small>Free to search · one flat fee to apply</small></div><p><b>Founder post</b>Why we built GrantRadar, and why we never take a cut of your grant.</p></div>
-        <div class="post"><div class="art a3"><small>Reel · trades</small><span>3 grants every BC <em>trades business</em> should know.</span><small>Part 1 of 3</small></div><p><b>Explainer series</b>Plain-language walk-throughs of hiring, training and equipment programs.</p></div>
-        <div class="post"><div class="art a4"><small>Facebook · local groups</small><span>Hiring this summer? There may be a grant for that.</span><small>GrantRadar</small></div><p><b>Local group post</b>Shared in neighbourhood business groups and BIA pages, with a link to a free match check.</p></div>
+      <div class="ads-video">
+        <div class="post"><video controls playsinline preload="metadata" src="ads/ad2-maya.mp4#t=0.1" aria-label="Video ad: Maya's café story"></video><p><b>Video · Instagram and Facebook · cafés (31 s)</b>Maya runs a six-person café with no time for grant guides. GrantRadar finds three grants she'd never heard of, drafts one, and she keeps all $7,500 after a $399 fee.</p></div>
+        <div class="post"><video controls playsinline preload="metadata" src="ads/ad1-ping.mp4#t=0.1" aria-label="Video ad: how GrantRadar works in 16 seconds"></video><p><b>Video · Reels and TikTok · all owners (16 s)</b>"How many grants did your business miss this year?" The whole idea in 16 seconds: find, draft, track, one flat fee.</p></div>
       </div>
-      <p class="fine center">Sample posts for the launch. Our final GrantRadar ads and videos will be added here.</p>
+      <div class="posts">
+        <div class="post"><img src="ads/01-cafe-radar.png" alt="Ad: Your café qualifies for grants nobody told you about, with example grant matches" loading="lazy" width="1080" height="1350"><p><b>Instagram · cafés</b>Shows real-looking matches for a café, so owners picture their own business.</p></div>
+        <div class="post"><img src="ads/03-11pm.png" alt="Ad: 11:47 PM reading page 38 of a grant guide, versus GrantRadar's answer in plain English" loading="lazy" width="1080" height="1350"><p><b>Facebook · local groups</b>The problem in one picture: a 47-page program guide at midnight, versus a plain answer.</p></div>
+        <div class="post"><img src="ads/02-keep-your-grant.png" alt="Ad: Consultants take a cut. We charge a flat fee. Table comparing consultant fees with GrantRadar" loading="lazy" width="1080" height="1350"><p><b>LinkedIn · owners</b>Our price promise: one flat fee, and you keep 100% of your grant.</p></div>
+        <div class="post"><img src="ads/07-apply-more-pay-less.png" alt="Ad: Apply more, pay less. Regular 10% off, Partner 15% off, referral $100 off" loading="lazy" width="1080" height="1350"><p><b>Instagram · past customers</b>Brings customers back for their next grant with loyalty rewards.</p></div>
+      </div>
+      <div class="stack">
+        <p class="adlabel">Instagram carousel · trades · swipe through 5 slides</p>
+        <div class="carousel" tabindex="0" aria-label="Trades carousel ad, 5 slides">
+          <img src="ads/05-trades-carousel-1.png" alt="Slide 1: 3 grant types every trades business should know" loading="lazy" width="1080" height="1350">
+          <img src="ads/05-trades-carousel-2.png" alt="Slide 2: Hiring and wage subsidies" loading="lazy" width="1080" height="1350">
+          <img src="ads/05-trades-carousel-3.png" alt="Slide 3: Equipment and tech grants" loading="lazy" width="1080" height="1350">
+          <img src="ads/05-trades-carousel-4.png" alt="Slide 4: Training and certification" loading="lazy" width="1080" height="1350">
+          <img src="ads/05-trades-carousel-5.png" alt="Slide 5: Which ones are yours? Check your matches free" loading="lazy" width="1080" height="1350">
+        </div>
+      </div>
+      <p class="fine center">Our launch ads. Businesses and grant amounts shown are examples.</p>
     </div>
   </section>
   <section class="band">
